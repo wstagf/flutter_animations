@@ -9,7 +9,6 @@ class SplashPage extends StatefulWidget {
 
 class _SplashPageState extends State<SplashPage> {
   bool initied = false;
-  double sizeRadius = 50.0;
 
   @override
   void initState() {
@@ -21,36 +20,36 @@ class _SplashPageState extends State<SplashPage> {
     Future.delayed(const Duration(seconds: 5), () {
       setState(() {
         initied = true;
-        sizeRadius = 0;
       });
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: AnimatedContainer(
-          height: !initied ? 100 : MediaQuery.of(context).size.height,
-          width: !initied ? 100 : MediaQuery.of(context).size.width,
-          duration: const Duration(seconds: 2),
-          curve: Curves.fastOutSlowIn,
-          child: Container(
-            padding: const EdgeInsets.all(10),
+    return Material(
+      child: Center(
+        child: FittedBox(
+          fit: BoxFit.none,
+          child: AnimatedContainer(
+            height: !initied ? 100 : MediaQuery.of(context).size.height * 2,
+            width: !initied ? 100 : MediaQuery.of(context).size.height * 2,
+            duration: const Duration(seconds: 2),
+            curve: Curves.fastOutSlowIn,
             decoration: BoxDecoration(
-              color: Colors.green,
+              color: Colors.lightBlue,
               borderRadius: BorderRadius.all(
-                Radius.circular(sizeRadius),
+                Radius.circular(MediaQuery.of(context).size.height),
               ),
             ),
             child: Center(
               child: AnimatedOpacity(
                 opacity: !initied ? 1 : 0,
                 duration: const Duration(seconds: 3),
-                child: const SizedBox(
-                  width: 50,
-                  height: 50,
-                  child: FlutterLogo(),
+                child: Container(
+                  width: 100,
+                  height: 100,
+                  padding: const EdgeInsets.all(15),
+                  child: const FlutterLogo(),
                 ),
               ),
             ),
